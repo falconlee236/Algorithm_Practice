@@ -1,5 +1,5 @@
 /*1676*/
-/*cheating*?
+/*cheating*/
 #include <iostream>
 using namespace std;
 
