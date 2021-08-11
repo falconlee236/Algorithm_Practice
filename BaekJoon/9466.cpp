@@ -1,35 +1,41 @@
+/*9466*/
+/*Cheating*/
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int arr[100001];
-int* visited;
-int* last;
-vector<vector<int>> g;
+bool visited[100001];
+bool done[100001];
+int res;
 
 void dfs(int x){
-    visited[x] = 1;
-    for(int i = 0; i < g[x].size(); i++){
-        int y = g[x][i];
-        if(!visited[y]) dfs(y);
-        else last[x] = y;
+    visited[x] = true;
+    int y = arr[x];
+    if(!visited[y]) dfs(y);
+    else{
+        if(!done[y]){
+            for(int i = y; i != x; i = arr[i]){
+                res++;
+            }
+            res++;
+        }
     }
+    done[x] = true;
 }
 
 int main(){
     int t; scanf("%d", &t);
     while(t--){
+        res = 0;
         int n; scanf("%d", &n);
-        for(int i = 1; i <= n; i++) scanf("%d", &arr[i]);
-        visited = new int[n + 1]{};
-        last = new int[n + 1]{};
-        g = vector<vector<int>>(n + 1);
-        for(int i = 1; i <= n; i++) g[i].push_back(arr[i]);
-        int res = 0;
         for(int i = 1; i <= n; i++){
-            if(!visited[i] && dfs(i, i)) res++;
-            delete visited;
-            visited = new int[n + 1]{};
+            scanf("%d", &arr[i]);
+            visited[i] = false;
+            done[i] = false;
+        }
+        
+        for(int i = 1; i <= n; i++){
+            if(!visited[i]) dfs(i);
         }
         printf("%d\n", n - res);
     }
