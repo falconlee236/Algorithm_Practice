@@ -6,7 +6,7 @@ DFS, BFS
 https://ldgeao99.tistory.com/398?category=864321
 
 Binary search
-10815, 11662
+11662
 
 분할정복 - 11728, 1780, 11729, 1992, 2447, 2448, 1517, 2261
 
