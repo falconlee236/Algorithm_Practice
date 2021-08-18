@@ -29,47 +29,19 @@ int main() {
 	            res = cost;
 	            break;
 	        }
-	        
-	        string str = to_string(p);
 	        q.pop();
-	        for(int i = 1; i < 10; i++){
-	            str[0] = (char)(i + '0');
-	            int num = stoi(str);
-	            if(prime[num] && !visit[num]){
-	                visit[num] = 1;
-	                q.emplace(num, cost + 1);
+            for(int i = 0; i < 4; i++){
+                string str = to_string(p);
+                for(int j = 0; j < 10; j++){
+                    if(i == 0 && j == 0) continue; 
+	                str[i] = (char)(j + '0');
+	                int num = stoi(str);
+	                if(prime[num] && !visit[num]){
+	                    visit[num] = 1;
+	                    q.emplace(num, cost + 1);
+	                }
 	            }
-	        }
-	        
-	        str = to_string(p);
-	        for(int i = 0; i < 10; i++){
-	            str[1] = (char)(i + '0');
-	            int num = stoi(str);
-	            if(prime[num] && !visit[num]){
-	                visit[num] = 1;
-	                q.emplace(num, cost + 1);
-	            }
-	        }
-	        
-	        str = to_string(p);
-	        for(int i = 0; i < 10; i++){
-	            str[2] = (char)(i + '0');
-	            int num = stoi(str);
-	            if(prime[num] && !visit[num]){
-	                visit[num] = 1;
-	                q.emplace(num, cost + 1);
-	            }
-	        }
-	        
-	        str = to_string(p);
-	        for(int i = 0; i < 10; i++){
-	            str[3] = (char)(i + '0');
-	            int num = stoi(str);
-	            if(prime[num] && !visit[num]){
-	                visit[num] = 1;
-	                q.emplace(num, cost + 1);
-	            }
-	        }
+            }
 	    }
 	    printf("%d\n", res);
 	}
