@@ -5,7 +5,6 @@
 using namespace std;
 
 int arr[9];
-int visit[9];
 int n, m;
 vector<int> v;
 
@@ -16,12 +15,9 @@ void func(int pos, int cnt){
         return;
     }
     for(int i = pos; i <= n; i++){
-        if(visit[i]) continue;
-        visit[i] = 1;
         v.push_back(i);
         func(i + 1, cnt + 1);
         v.pop_back();
-        visit[i] = 0;
     }
 }
 
