@@ -6,6 +6,7 @@ using namespace std;
 
 int lab[10][10];
 int n, m, ans;
+vector<pair<int, int>> v;
 
 void bfs(){
     int arr[10][10];
@@ -43,14 +44,25 @@ void bfs(){
             if(arr[i][j] == 0) res++;
         }
     }
-    
     ans = max(res, ans);
+}
+
+void wall(int pos, int cnt){
+    if(cnt == 3){
+        bfs();
+        return;
+    }
+    for(int i = pos; i < v.size(); i++){
+        lab[v[i].first][v[i].second] = 1;
+        wall(i + 1, cnt + 1);
+        lab[v[i].first][v[i].second] = 0;
+    }
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
-    vector<pair<int, int>> v;
+
     cin >> n >> m;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
@@ -58,23 +70,7 @@ int main(){
             if(lab[i][j] == 0) v.push_back({i, j});
         }
     }
-    
-    int cnt = 0;
-    int len = v.size();
-    for(int i = 0; i < len - 2; i++){
-        lab[v[i].first][v[i].second] = 1;
-        for(int j = i + 1; j < len - 1; j++){
-            lab[v[j].first][v[j].second] = 1;
-            for(int k = j + 1; k < len; k++){
-                lab[v[k].first][v[k].second] = 1;
-                bfs();
-                lab[v[k].first][v[k].second] = 0;
-            }
-            lab[v[j].first][v[j].second] = 0;
-        }
-        lab[v[i].first][v[i].second] = 0;
-    }
-    
+    wall(0, 0);
     cout << ans;
     return 0;
 }
