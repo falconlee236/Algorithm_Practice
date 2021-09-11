@@ -32,7 +32,6 @@ int main() {
 	int size = lis.size() - 1;
 	for(int i = n - 1; i >= 0; i--){
 	    if(idx[i] == size){
-	        if(idx[i] == 0 && line[i].second == 1) continue;
 	        size--;
 	        idx[i] = -1;
 	    }
