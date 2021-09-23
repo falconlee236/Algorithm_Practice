@@ -12,7 +12,7 @@ int main() {
 	    char alpha[1000];
 	    for(int i = 0; i < n; i++) cin >> alpha[i];
 	    string str(1, alpha[0]);
-	    char left = alpha[0], right = alpha[0];
+	    char left = alpha[0];
 	    for(int i = 1; i < n; i++){
 	        char ch = alpha[i];
 	        if(ch <= left){
@@ -20,7 +20,6 @@ int main() {
 	            left = ch;
 	        } else{
 	            str = str + ch;
-	            right = ch;
 	        }
 	    }
 	    cout << str << "\n";
