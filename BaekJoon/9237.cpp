@@ -1,6 +1,6 @@
 /*9237*/
 /*Cheating*/
-#include <cstdio>
+#include <iostream>
 #include <algorithm>
 using namespace std;
 
