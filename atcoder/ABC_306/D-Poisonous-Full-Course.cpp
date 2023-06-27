@@ -2,20 +2,22 @@
 #include <algorithm>
 
 using namespace std;
+long long dp[2][300010];
 
 int main(void){
     ios_base::sync_with_stdio(false); cin.tie(0);
     int n; cin >> n;
-    long long res = 0, tmp = 0;
-    for(int i = 0; i < n; i++){
-        int isok; long long taste; cin >> isok >> taste;
-        if (isok) tmp = max(tmp, taste);
+    for(int i = 1; i <= n; i++){
+        int ispoision; long long taste; cin >> ispoision >> taste;
+        if (ispoision){
+            dp[0][i] = dp[0][i - 1];
+            dp[1][i] = max(dp[1][i - 1], dp[0][i - 1] + taste);
+        }
         else{
-            if (taste + tmp >= 0 || taste >= 0)
-                res += (taste + tmp >= taste ? taste + tmp : taste);
-            tmp = 0;
+            dp[1][i] = dp[1][i - 1];
+            dp[0][i] = max(max(dp[0][i - 1], dp[0][i - 1] + taste), dp[1][i - 1] + taste);
         }
     }
-    if (tmp >= 0) cout << res + tmp;
-    else cout << res;
+    cout << max(dp[0][n] , dp[1][n]);
+    return 0;
 }
