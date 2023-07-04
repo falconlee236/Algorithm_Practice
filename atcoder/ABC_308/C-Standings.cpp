@@ -7,7 +7,7 @@ using namespace std;
 int main(void){
     ios_base::sync_with_stdio(false); cin.tie(0);
     int n; cin >> n;
-    vector<pair<double, int>> ans;
+    vector<pair<double, int>> ans; 
     for(int i = 0; i < n; i++){
         int a, b; cin >> a >> b;
         ans.emplace_back((double)a / (a + b), i + 1);
