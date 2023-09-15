@@ -36,10 +36,11 @@ void bfs(int x, int y){
 int main(void){
     ios_base::sync_with_stdio(false); cin.tie(0);
     cin >> n >> m;
+    int ans = 0;
     for(int i = 0; i < n; i++)
         for(int j = 0; j < m; j++) cin >> sea[i][j];
     while (1){
-        int cnt = 0, ans = 1;
+        int cnt = 0;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 if (sea[i][j] == 0){
