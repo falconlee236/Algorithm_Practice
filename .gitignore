@@ -37,3 +37,6 @@
 *.vscode
 *.cph
 *.bin
+
+# input txt
+input.txt
