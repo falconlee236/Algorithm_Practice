@@ -1,11 +1,12 @@
 #include <iostream>
+#include <numeric>
 #include <algorithm>
 using namespace std;
 
 int main(void){
 	int n; cin >> n;
 	int arr[n];
-	for(int i = 0; i < n; i++) arr[i] = i + 1;
+	iota(arr, arr + n, 1);
 	do{
 		for(auto x : arr) cout << x << " ";
 		cout << "\n";
