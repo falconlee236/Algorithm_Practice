@@ -14,9 +14,7 @@ bool cmp(pair<int, int> a, pair<int, int> b){
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
 	int n; cin >> n;
 	int arr[500001];
 	map<int, int> mp;
@@ -27,7 +25,7 @@ int main() {
 	}
 	sort(arr, arr + n);
 	double one = accumulate(arr, arr + n, 0) / (double)n;
-	cout << round(one) << "\n";
+	cout << (round(one) == -0 ? 0 : round(one)) << "\n";
 	cout << arr[n / 2] << "\n";
     vector<pair<int, int>> v(mp.begin(), mp.end());
     sort(v.begin(), v.end(), cmp);
