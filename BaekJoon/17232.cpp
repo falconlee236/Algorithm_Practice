@@ -16,17 +16,11 @@ int main(){
 				int cnt = prefix[bx][by] - prefix[bx][ty] - prefix[tx][by] + prefix[tx][ty] - (arr[i][j] == '*');
 				if (arr[i][j] == '*'){
 					if (a <= cnt && cnt <= b) continue;
-					else if (cnt < a || b < cnt) arr[i][j] = 'x';
+					else if (cnt < a || b < cnt) arr[i][j] = '.';
 				} else {
-					if (a < cnt && cnt <= b) arr[i][j] = 'o';
+					if (a < cnt && cnt <= b) arr[i][j] = '*';
 				}
 			}	
-		}
-		for(int i = 1; i <= n; i++){
-			for(int j = 1; j <= m; j++){
-				if (arr[i][j] == 'x') arr[i][j] = '.';
-				else if (arr[i][j] == 'o') arr[i][j] = '*';
-			}
 		}
 	}
 	for(int i = 1; i <= n; i++){
