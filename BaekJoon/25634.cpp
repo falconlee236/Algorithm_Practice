@@ -16,3 +16,5 @@ int main(){
 	}
 	cout << ans + *max_element(dp + 1, dp + n + 1);
 }
+
+//https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
