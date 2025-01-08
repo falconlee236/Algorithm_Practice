@@ -1,3 +1,4 @@
+package BaekJoon;
 import java.io.*;
 class main {
 	BufferedWriter bw;
