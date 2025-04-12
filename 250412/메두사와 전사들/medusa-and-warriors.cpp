@@ -203,6 +203,7 @@ int main(){
     stack<pii> stk;
     pii tmp_pair = {er, ec};
     do {
+        // cout << tmp_pair.first << " " << tmp_pair.second << "\n";
         stk.push(tmp_pair);
         tmp_pair = parent[tmp_pair.first][tmp_pair.second];
     } while (tmp_pair.first != sr || tmp_pair.second != sc);
@@ -253,16 +254,17 @@ int main(){
                 if (area[i][j] >= 0) area[i][j] = -1;
             }
         }
-        // 메두사로 이동할 수 있게
-        area[med_cur.first][med_cur.second] = -2;
-        memset(war_cnt, 0, sizeof(war_cnt));
-        
         // cout << "final \n";
         // for(int i = 0; i < N; i++){
         //     for(int j = 0; j < N; j++) cout << area[i][j] << " ";
         //     cout << "\n";
         // }
         // cout << "\n";
+        // 메두사로 이동할 수 있게
+        area[med_cur.first][med_cur.second] = -2;
+        memset(war_cnt, 0, sizeof(war_cnt));
+        
+        
         // cout << "stone warrior \n";
         // for(int i = 0; i < N; i++){
         //     for(int j = 0; j < N; j++) {
@@ -279,11 +281,11 @@ int main(){
             for(int j = 0; j < N; j++){
                 // 첫번째 이동, 상하좌우, 시야로는 못감
                 // 전사 있고,  돌이 아닌경우
-                int war_move_dist[4]; memset(war_move_dist, -1, sizeof(war_move_dist));
+                int war_move_dist[4]; memset(war_move_dist, 0, sizeof(war_move_dist));
                 if (war_board[i][j].size() > 0 && war_board[i][j].front() == 0){
                     // cout << "in\n";
                     // cout << i << " " << j << "\n";
-                    int base_dis = abs(med_cur.first - i) + abs(med_cur.second - j);
+                    int base_dis = abs(med_cur.first - i) + abs(med_cur.second - j), cur_war_num = war_board[i][j].size();
                     for(int d : first_prior){
                         int nx = i + dx[d], ny = j + dy[d];
                         if (nx < 0 || nx >= N || ny < 0 || ny >= N || area[nx][ny] == -1) continue;
@@ -295,13 +297,12 @@ int main(){
                         // cout << war_move_dist[d] << " ";
                         if (war_move_dist[d] > 0) first_move_dir = min(first_move_dir, d); // 양수가 가까워지는 방향
                     }
-                    // cout << "\n";
                     // 아무곳도 못가는 경우
                     if (first_move_dir == 10) continue;
                     
                     int tmp_x = i + dx[first_move_dir], tmp_y = j + dy[first_move_dir];
-                    // 전사 움직임 1 증가
-                    war_sum++;
+                    // 전사 움직임 현재 전사 개수 만큼 증가
+                    war_sum += cur_war_num;
 
                     // 첫번째 움직임
                     // cout << "first move\n";
@@ -309,7 +310,7 @@ int main(){
                     // cout << tmp_x << " " << tmp_y << "\n";
                     // 근데 메두사를 만났어 ㅋㅋㅋㅋ 그럼 공격하고 죽어야지
                     if (tmp_x == med_cur.first && tmp_y == med_cur.second){
-                        attack_num++;
+                        attack_num += cur_war_num;
                         war_board[i][j].clear();
                         continue;
                     }
@@ -324,7 +325,7 @@ int main(){
                         war_move_dist[d] = base_dis - (abs(med_cur.first - nx) + abs(med_cur.second - ny));
                     }
                     int second_move_dir = 10;
-                    // cout << "war_move_dist \n";
+                    // cout << "second_move \n";
                     for(int i = 0; i < 4; i++){
                         // cout << war_move_dist[i] << " ";
                         if (war_move_dist[second_prior[i]] > 0) second_move_dir = min(second_move_dir, i);
@@ -341,11 +342,10 @@ int main(){
                     for(int d = 0; d < war_board[i][j].size(); d++) tmp_war_board[tmp_x][tmp_y].push_back(0);
                     war_board[i][j].clear();
                     // 전사 움직임 1 증가
-                    war_sum++;
+                    war_sum += cur_war_num;
                     // cout << "second move\n";
                     // cout << second_move_dir << " " << war_move_dist[second_move_dir] << "\n";
                     // cout << tmp_x << " " << tmp_y << "\n";
-                    // cout << "\n";
                 }
             }
         }
