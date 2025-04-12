@@ -41,7 +41,6 @@ int war_cnt[4];
 void search(int x, int y, int mid_dir, int diag_dir, int see){
     if (mid_dir != diag_dir){
         for(int tmp_x = x, tmp_y = y; 0 <= tmp_x && tmp_x < N && 0 <= tmp_y && tmp_y < N; tmp_x += dx[diag_dir], tmp_y += dy[diag_dir]){
-            // cout << tmp_x << " " << tmp_y << " " << mid_dir << " " << diag_dir << " " << see << "\n";
             for(int nx = tmp_x, ny = tmp_y; 0 <= nx && nx < N && 0 <= ny && ny < N; nx += dx[mid_dir], ny += dy[mid_dir]){
                 if (see == -1) {
                     if (war_board[nx][ny].size() > 0){
