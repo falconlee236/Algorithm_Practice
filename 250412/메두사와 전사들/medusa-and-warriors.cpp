@@ -121,12 +121,6 @@ void do_search(int x, int y, int dir){
     //     for(int j = 0; j < N; j++) cout << area[i][j] << " ";
     //     cout << "\n";
     // }
-    // 영역 별 전사 개수 세기
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++) {
-            if  (area[i][j] != -2) war_cnt[dir] += war_board[i][j].size();
-        }
-    }
     // 안전 지대 만들기
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
@@ -134,6 +128,12 @@ void do_search(int x, int y, int dir){
             if (area[i][j] == mid) search(i, j, mid, mid, -2);
             else if (area[i][j] == left) search(i, j, mid, left, -2);
             else if (area[i][j] == right) search(i, j, mid, right, -2);
+        }
+    }
+    // 돌 된 전사 개수 세기
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++) {
+            if  (war_board[i][j].size() > 0 && war_board[i][j].front() == 1) war_cnt[dir] += war_board[i][j].size();
         }
     }
     // cout << "final \n";
@@ -219,7 +219,7 @@ int main(){
         // 지나가다가 전사를 만나면 공격 못하고 사라짐
         if (war_board[med_cur.first][med_cur.second].size() > 0) war_board[med_cur.first][med_cur.second].clear();
         // 2. 메두사 시선
-        // 가장 많은 전사를 볼 수 있는 곳으로 바라봄 상하좌우 우선순위
+        // 가장 많은 전사를 볼 수 있는 곳으로 바라봄 상하좌우 우선순위 (돌된 애들만 카운트)
         
         int final_dir = 0, final_war_cnt = -1;
         for(int i = 0; i < N; i++){
@@ -283,6 +283,7 @@ int main(){
                 // 전사 있고,  돌이 아닌경우
                 int war_move_dist[4]; memset(war_move_dist, 0, sizeof(war_move_dist));
                 if (war_board[i][j].size() > 0 && war_board[i][j].front() == 0){
+                    // cout << war_sum << "\n";
                     // cout << "in\n";
                     // cout << i << " " << j << "\n";
                     int base_dis = abs(med_cur.first - i) + abs(med_cur.second - j), cur_war_num = war_board[i][j].size();
