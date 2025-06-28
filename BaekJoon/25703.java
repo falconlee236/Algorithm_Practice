@@ -10,4 +10,3 @@ public class test4 {
         System.out.print(sb);
     }
 }
-// https://www.acmicpc.net/problem/25703
